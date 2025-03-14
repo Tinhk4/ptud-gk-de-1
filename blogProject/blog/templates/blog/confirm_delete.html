@@ -1,0 +1,13 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Xóa bài viết{% endblock %}
+
+{% block content %}
+<h1>⚠️ Xóa bài viết</h1>
+<p>Bạn chắc chắn muốn xóa "<strong>{{ post.title }}</strong>" chứ? Bài viết sẽ không thể phục hồi!</p>
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit">🗑️ Xóa ngay</button>
+    <a href="{% url 'home' %}">❌ Hủy bỏ</a>
+</form>
+{% endblock %}

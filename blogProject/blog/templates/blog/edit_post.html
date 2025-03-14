@@ -1,0 +1,15 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Chỉnh sửa bài viết{% endblock %}
+
+{% block content %}
+<h1>✏️ Chỉnh sửa bài viết</h1>
+<form method="POST">
+    {% csrf_token %}
+    <label>Tiêu đề bài viết:</label>
+    {{ form.title }}
+    <label>Nội dung bài viết:</label>
+    {{ form.content }}
+    <button type="submit">Lưu bài viết</button>
+</form>
+{% endblock %}

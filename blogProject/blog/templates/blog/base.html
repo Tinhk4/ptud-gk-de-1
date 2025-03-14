@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}My Blog{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'blog/style.css' %}">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>📚 My Blog</h2>
+        <nav>
+            <a href="{% url 'home' %}">🏠 Trang chủ</a>
+
+            {% if perms.blog.add_post %}
+                <a href="{% url 'create_post' %}">✏️ Tạo bài viết mới</a>
+            {% endif %}
+        </nav>
+
+        {% if user.is_authenticated %}
+            <p>👋 Xin chào, <strong>{{ user.username }}</strong></p>
+
+            <!-- Form logout sử dụng POST -->
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" style="background:none;border:none;padding:0;color:#e74c3c;cursor:pointer;font-size:16px;">
+                    🚪 Đăng xuất
+                </button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}">🔐 Đăng nhập</a>
+        {% endif %}
+    </div>
+
+    <div class="main-content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

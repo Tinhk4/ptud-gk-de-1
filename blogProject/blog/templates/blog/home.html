@@ -1,0 +1,26 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Trang chủ{% endblock %}
+
+{% block content %}
+<h1>Bài viết gần đây</h1>
+
+{% for post in posts %}
+    <div class="post">
+        <h2 class="post-title">{{ post.title }}</h2>
+        <p class="post-date">{{ post.created_at|date:"d/m/Y H:i" }}</p>
+        <img src="https://picsum.photos/seed/{{ post.id }}/800/400" alt="Ảnh bài viết">
+        <p>{{ post.content }}</p>
+
+        {% if perms.blog.change_post %}
+            <a href="{% url 'edit_post' post.pk %}">✏️ Chỉnh sửa</a>
+        {% endif %}
+        
+        {% if perms.blog.delete_post %}
+            | <a href="{% url 'delete_post' post.pk %}">🗑️ Xóa bài viết</a>
+        {% endif %}
+    </div>
+{% empty %}
+    <p>Chưa có bài viết nào.</p>
+{% endfor %}
+{% endblock %}

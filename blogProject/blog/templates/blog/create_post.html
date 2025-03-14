@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+{% block title %}Tạo bài viết mới{% endblock %}
+
+{% block content %}
+<h1>📝 Tạo bài viết mới</h1>
+<form method="POST">
+    {% csrf_token %}
+    <label>Tiêu đề:</label>
+    {{ form.title }}
+    <label>Nội dung:</label>
+    {{ form.content }}
+    <button type="submit">Đăng bài ✨</button>
+</form>
+{% endblock %}
